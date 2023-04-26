@@ -21,8 +21,3 @@ print("1 record inserted, ID:", mycursor.lastrowid)
 
 mycursor.close()
 mydb.close()
-
-
-
-
-
