@@ -24,6 +24,7 @@
 
 
 # ------------------------------------------------------------------------
+import csv
 import mysql.connector
 
 mydb = mysql.connector.connect(
@@ -102,6 +103,19 @@ CONSTRAINT food_PK PRIMARY KEY(food_small_scale_classification)\
 # CONSTRAINT healthy_food_FK FOREIGN KEY (customer_id) references customer(id)\
 # CONSTRAINT healthy_food_FK2 FOREIGN KEY (food_small_scale_classification) references food(food_small_scale_classification)\
 # );")
+# ------------------------------------------------------
+
+# food.csv파일 mysql에 삽입
+# ------------------------------------------------------
+
+with open('food.csv') as csvfile:
+    reader = csv.DictReader(csvfile)
+    for row in reader:
+        sql = "INSERT INTO food (food_large_scale_classification, food_medium_scale_classification, food_small_scale_classification, serving_size(g),\
+            calorie(g), protein(g), fat(g), carbohydrate(g), salt(mg)) VALUES (%s, %s, %s, %d, %f, %f, %f, %f, %f)"
+        val = (row['food_large_scale_classification'], row['food_medium_scale_classification'], row['food_small_scale_classification'], row['serving_size(g)'],
+               row['calorie(g)'], row['protein(g)'], row['fat(g)'], row['carbohydrate(g)'], row['salt(mg)'])
+        mycursor.execute(sql, val)
 # ------------------------------------------------------
 
 mydb.commit()
