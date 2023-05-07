@@ -39,18 +39,18 @@ mycursor.execute("USE food_doctor")
 
 # 음식 테이블
 # ------------------------------------------------------
-mycursor.execute("CREATE TABLE food (\
+mycursor.execute("create table food(\
 food_small_scale_classification VARCHAR(12) NOT NULL,\
-food_no INT AUTO_INCREMENT,\
+food_no INT,\
 food_large_scale_classification VARCHAR(9),\
 food_medium_scale_classification VARCHAR(9),\
-serving_size(g) INT,\
-calorie(g) FLOAT,\
-protein(g) FLOAT,\
-fat(g) FLOAT,\
-carbohydrate(g) FLOAT,\
-salt(mg) FLOAT,\
-CONSTRAINT food_PK PRIMARY KEY(food_small_scale_classification)\
+serving_size_g INT,\
+calorie_g FLOAT,\
+protein_g FLOAT,\
+fat_g FLOAT,\
+carbohydrate_g FLOAT,\
+salt_mg FLOAT,\
+PRIMARY KEY(food_small_scale_classification)\
 );")
 # ------------------------------------------------------
 
@@ -89,7 +89,7 @@ CONSTRAINT food_PK PRIMARY KEY(food_small_scale_classification)\
 # customer_id VARCHAR(12),\
 # food_small_scale_classification VARCHAR(12),\
 # CONSTRAINT preferred_food_PK PRIMARY KEY(customer_id, food_small_scale_classification),\
-# CONSTRAINT preferred_food_FK FOREIGN KEY (customer_id) references customer(id)\
+# CONSTRAINT preferred_food_FK FOREIGN KEY (customer_id) references customer(id),\
 # CONSTRAINT preferred_food_FK2 FOREIGN KEY (food_small_scale_classification) references food(food_small_scale_classification)\
 # );")
 # ------------------------------------------------------
@@ -100,7 +100,7 @@ CONSTRAINT food_PK PRIMARY KEY(food_small_scale_classification)\
 # customer_id VARCHAR(12),\
 # food_small_scale_classification VARCHAR(12),\
 # CONSTRAINT healthy_food_PK PRIMARY KEY(customer_id, food_small_scale_classification),\
-# CONSTRAINT healthy_food_FK FOREIGN KEY (customer_id) references customer(id)\
+# CONSTRAINT healthy_food_FK FOREIGN KEY (customer_id) references customer(id),\
 # CONSTRAINT healthy_food_FK2 FOREIGN KEY (food_small_scale_classification) references food(food_small_scale_classification)\
 # );")
 # ------------------------------------------------------
@@ -108,13 +108,13 @@ CONSTRAINT food_PK PRIMARY KEY(food_small_scale_classification)\
 # food.csv파일 mysql에 삽입
 # ------------------------------------------------------
 
-with open('food.csv') as csvfile:
+with open('food.csv', "r", encoding='UTF8') as csvfile:
     reader = csv.DictReader(csvfile)
     for row in reader:
-        sql = "INSERT INTO food (food_large_scale_classification, food_medium_scale_classification, food_small_scale_classification, serving_size(g),\
-            calorie(g), protein(g), fat(g), carbohydrate(g), salt(mg)) VALUES (%s, %s, %s, %d, %f, %f, %f, %f, %f)"
-        val = (row['food_large_scale_classification'], row['food_medium_scale_classification'], row['food_small_scale_classification'], row['serving_size(g)'],
-               row['calorie(g)'], row['protein(g)'], row['fat(g)'], row['carbohydrate(g)'], row['salt(mg)'])
+        sql = "INSERT INTO food (food_no, food_large_scale_classification, food_medium_scale_classification, food_small_scale_classification, serving_size_g,\
+            calorie_g, protein_g, fat_g, carbohydrate_g, salt_mg) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
+        val = (row['food_no'], row['food_large_scale_classification'], row['food_medium_scale_classification'], row['food_small_scale_classification'], row['serving_size_g'],
+               row['calorie_g'], row['protein_g'], row['fat_g'], row['carbohydrate_g'], row['salt_mg'])
         mycursor.execute(sql, val)
 # ------------------------------------------------------
 
