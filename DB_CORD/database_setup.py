@@ -24,6 +24,7 @@
 
 
 # ------------------------------------------------------------------------
+# pip install pymysql
 import csv
 import mysql.connector
 
