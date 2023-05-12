@@ -35,8 +35,8 @@ mydb = mysql.connector.connect(
 )
 
 mycursor = mydb.cursor()
-mycursor.execute("create database food_doctor;")  # 데이터베이스 만들기
-mycursor.execute("USE food_doctor")
+mycursor.execute("create database food_recommendation;")  # 데이터베이스 만들기
+mycursor.execute("USE food_recommendation")
 
 # 음식 테이블
 # ------------------------------------------------------
@@ -105,6 +105,19 @@ PRIMARY KEY(food_small_scale_classification)\
 # CONSTRAINT healthy_food_FK2 FOREIGN KEY (food_small_scale_classification) references food(food_small_scale_classification)\
 # );")
 # ------------------------------------------------------
+
+# 커뮤니티
+# ------------------------------------------------------
+# mycursor.execute("CREATE TABLE community(\
+# serial_number INT AUTO_INCREMENT,\
+# customer_id VARCHAR(12),\
+# title TEXT,\
+# main_text TEXT,\
+# CONSTRAINT community_PK PRIMARY KEY(serial_number),\
+# CONSTRAINT community_FK FOREIGN KEY (customer_id) references customer(id)\
+# );")
+# ------------------------------------------------------
+
 
 # food.csv파일 mysql에 삽입
 # ------------------------------------------------------
