@@ -8,6 +8,8 @@ mydb = mysql.connector.connect(
 
 mycursor = mydb.cursor()
 mycursor.execute("USE food_doctor")
+mycursor.execute("create database food_recommendation;")  # 데이터베이스 만들기
+mycursor.execute("USE food_recommendation")
 
 #mycursor.execute('CREATE TABLE customers (test1 INT AUTO_INCREMENT PRIMARY KEY, test2 VARCHAR(255))')
 

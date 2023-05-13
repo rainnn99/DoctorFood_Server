@@ -22,7 +22,7 @@ mydb = mysql.connector.connect(
     host="localhost",
     user="root",
     password="",  # 비밀번호 입력
-    database="food_doctor"
+    database="food_recommendation"
 )
 
 mycursor = mydb.cursor()
